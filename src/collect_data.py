@@ -17,7 +17,6 @@ def collect_data(solverAddress, startBlock, endBlock):
         print("Error while trying to connect to Etherscan")
         return False
     
-    
     data = response.json()
 
     web3 = Web3(Web3.HTTPProvider(INFURA_MAINNET_CONNECTION_URL))
@@ -62,7 +61,6 @@ def collect_data(solverAddress, startBlock, endBlock):
 
     file.close()
     return True
-
 
 
 ####################################
