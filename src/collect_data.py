@@ -24,6 +24,10 @@ def collect_data(solverAddress, startBlock, endBlock):
     fileName = solverAddress + "_from_" + str(startBlock) + "_to_" + str(endBlock) + ".csv"
     file = open(fileName, 'w', newline='')
     writer = csv.writer(file)
+    #The resulting .csv file has the following name format:
+    #    #solver_address_from_$startBlock_to_$endBlock.csv"
+    # and its columns are labeled with the self-explanatory labels:
+    #   hash,success,num_orders,gas_used,gas_price
     firstLine = ["hash","success","num_orders","gas_used","gas_price"]
     writer.writerow(firstLine)
 
