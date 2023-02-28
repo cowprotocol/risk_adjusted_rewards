@@ -21,12 +21,11 @@ def collect_data(solverAddress, startBlock, endBlock):
     data = response.json()
 
     web3 = Web3(Web3.HTTPProvider(INFURA_MAINNET_CONNECTION_URL))
-    #th = TransactionHandler()
 
     fileName = solverAddress + "_from_" + str(startBlock) + "_to_" + str(endBlock) + ".csv"
     file = open(fileName, 'w', newline='')
     writer = csv.writer(file)
-    firstLine = ["hash","success","numOrders","gasUsed","gasPrice"]
+    firstLine = ["hash","success","num_orders","gas_used","gas_price"]
     writer.writerow(firstLine)
 
     for t in data['result']:
