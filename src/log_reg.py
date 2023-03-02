@@ -5,23 +5,23 @@ import numpy as np
 import pandas as pd
 
 def myLogRegression(featureList, df, testShare = 0.25, resampling = False, ):
-  df['call_revert'] = pd.to_numeric(df['call_revert'], downcast='integer')
+  df['revert'] = pd.to_numeric(df['revert'], downcast='integer')
   if len(featureList) == 1:
-      X_train, X_test, y_train, y_test = train_test_split(df[featureList[0]].array.reshape(-1, 1), df['call_revert'].values.ravel(), test_size=testShare, random_state=0)    
+      X_train, X_test, y_train, y_test = train_test_split(df[featureList[0]].array.reshape(-1, 1), df['revert'].values.ravel(), test_size=testShare, random_state=0)    
   else:
-      X_train, X_test, y_train, y_test = train_test_split(df[featureList], df['call_revert'].values.ravel(), test_size=testShare, random_state=0)
+      X_train, X_test, y_train, y_test = train_test_split(df[featureList], df['revert'].values.ravel(), test_size=testShare, random_state=0)
   
   if resampling: #then we will actually change the train data only, but not the test data!
     if(len(featureList)) == 1:       
       X_train = pd.DataFrame(X_train[0], index=range(0,len(y_train))) #we need this to be a dataframe. Yes this looks weird but the test_train_split operates with nonintuitive arrays
-    y_train = pd.DataFrame(y_train,index=X_train.index, columns=['call_revert'])
+    y_train = pd.DataFrame(y_train,index=X_train.index, columns=['revert'])
     df_train = pd.concat([X_train, y_train],axis=1 )
-    meanRR = df_train['call_revert'].mean()
-    df_train['Weight'] = df_train['call_revert'].apply(lambda x: 1/meanRR if x == 1 else 1)    
+    meanRR = df_train['revert'].mean()
+    df_train['Weight'] = df_train['revert'].apply(lambda x: 1/meanRR if x == 1 else 1)    
     df_train['Weight'] = df_train['Weight'].astype(object)    
     df_train = df_train.sample(n=100000, replace=True, weights='Weight') #resampling with constant size 100k for now    
-    X_train = df_train.loc[:, (df_train.columns != 'call_revert') & (df_train.columns != 'Weight')]
-    y_train = df_train['call_revert']
+    X_train = df_train.loc[:, (df_train.columns != 'revert') & (df_train.columns != 'Weight')]
+    y_train = df_train['revert']
     
 
   myLogiReg= LogisticRegression()
@@ -68,5 +68,5 @@ def myLogRegression(featureList, df, testShare = 0.25, resampling = False, ):
   plt.show()
 
   #myLogiRegFinal= LogisticRegression()
-  #myLogiRegFinal.fit(df[featureList], df['call_revert'].values.ravel())
+  #myLogiRegFinal.fit(df[featureList], df['revert'].values.ravel())
   return myLogiReg
