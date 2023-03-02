@@ -6,6 +6,7 @@ import csv
 
 # Function that collects all necessary data and stores them in a csv file
 # The columns of this csv are ["hash","success","num_orders","gas_used","gas_price"]
+# For that, an Etherscan and Infura API key are needed.
 def collect_data(solverAddress, startBlock, endBlock):
     url = "https://api.etherscan.io/api?module=account&action=txlist&address=" \
             + solverAddress \
@@ -26,7 +27,7 @@ def collect_data(solverAddress, startBlock, endBlock):
     file = open(fileName, 'w', newline='')
     writer = csv.writer(file)
     #The resulting .csv file has the following name format:
-    #    #solver_address_from_$startBlock_to_$endBlock.csv"
+    #    "solver_address_from_$startBlock_to_$endBlock.csv"
     # and its columns are labeled with the self-explanatory labels:
     #   hash,success,num_orders,gas_used,gas_price
     firstLine = ["hash","success","num_orders","gas_used","gas_price"]
