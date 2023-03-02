@@ -4,7 +4,8 @@ from decode_call_data import decode_transaction_input
 from web3 import Web3
 import csv
 
-# Function that collects all necessary data and stores them
+# Function that collects all necessary data and stores them in a csv file
+# The columns of this csv are ["hash","success","num_orders","gas_used","gas_price"]
 def collect_data(solverAddress, startBlock, endBlock):
     url = "https://api.etherscan.io/api?module=account&action=txlist&address=" \
             + solverAddress \
