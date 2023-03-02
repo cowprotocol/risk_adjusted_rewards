@@ -7,6 +7,9 @@ df = pd.read_csv(fileName)
 df['success']=df['success'].astype('int') #call success as number not bool
 df['revert']=1-df['success'] #reverts are more intuitive to model
 
+### rescaling data in order to get nicer looking final result.
+df['gas_used'] = df['gas_used'] / 10**6
+df['gas_price'] = df['gas_price'] / 10
 from log_reg import myLogRegression
 
 myLogiRegFinal = myLogRegression(['gas_used','gas_price','num_orders'], df, resampling=False)
