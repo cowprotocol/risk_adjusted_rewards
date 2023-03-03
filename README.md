@@ -19,3 +19,8 @@ p = 1/(1 + exp(-β - ɑ1 * gas_used / 10^6 - ɑ2 * gas_price / 10 - ɑ3 * num_or
 ```
 
 where gas_price in gwei.
+
+# Reported score (relevant to the solver competition)
+
+For a given solution, one can compute the probability of success ```p_success = 1 - p_revert```, as specified above, and then report an expected score
+```score = p_success * (surplus + fees) - cost```
