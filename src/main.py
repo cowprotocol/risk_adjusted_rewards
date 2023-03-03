@@ -24,5 +24,5 @@ print("===== REGRESSION PARAMETERS =====")
 print("      intercept (β) :\t", intercept)
 print("slope_gas_used (α1):\t", slope_gas_used)
 print("slope_gas_price (α2):\t", slope_gas_price)
-print("slope_numb_orders (α3):\t", slope_num_orders)
+print("slope_num_orders (α3):\t", slope_num_orders)
 
